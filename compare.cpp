@@ -3,11 +3,24 @@
 
 #include "compare.h"
 
+
+QTextStream cout(stdout, QIODevice::WriteOnly);
 Compare::Compare(int rows, int cols, QWidget *parent)
     : QMainWindow(parent)
 {
-    auto table = new QTableWidget(rows, cols, this);
-    table->setSizeAdjustPolicy(QTableWidget::AdjustToContents);
+    QTableWidget createTable(rows,cols,parent);
+    createTable.setParent(parent);
+    cout<<"123"<<endl;
+
+//  QTableWidget createTable2(9,9);
+//  creteTable2->moveTo()
+}
+
+QTableWidget *createTable(int rows,int cols,QWidget *parent)
+{
+    auto *table = new QTableWidget(rows, cols,parent);
+//    table->setSizeAdjustPolicy(QTableWidget::AdjustToContents);
+    table->resize(800,500);
     for (int c = 0; c < cols; ++c) {
             QString character(QChar('A' + c));
             table->setHorizontalHeaderItem(c, new QTableWidgetItem(character));
@@ -26,4 +39,5 @@ Compare::Compare(int rows, int cols, QWidget *parent)
     table->setItem(7, 0, new QTableWidgetItem(*str,0));
     table->setItem(8, 0, new QTableWidgetItem(*str,0));
     table->setItem(9, 0, new QTableWidgetItem(*str,0));
+    return table;
 }

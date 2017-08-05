@@ -16,6 +16,9 @@ class Compare : public QMainWindow
 public:
 
     Compare(int rows, int cols, QWidget *parent = 0);
+private:
+    QTableWidget *createTable(int rows,int cols);
+
 
 };
 
