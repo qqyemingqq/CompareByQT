@@ -2,11 +2,13 @@
 #define COMEPAREOPERATE_H
 
 #include <QWidget>
+#include <QTableWidget>
 
-class comepareoperate
+class ComepareOperate
 {
 public:
-    comepareoperate();
+    ComepareOperate();
+    void PlaceTableDate(QTableWidget &tableWidget,QString &fileUrl);
 };
 
 #endif // COMEPAREOPERATE_H

@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    auto *table = new QTableWidget(9, 9,&w);
+    /*auto *table = new QTableWidget(9, 9,&w);
 //    table->setSizeAdjustPolicy(QTableWidget::AdjustToContents);
     table->resize(800,500);
     for (int c = 0; c < 9; ++c) {
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     table->setItem(7, 0, new QTableWidgetItem(*str,0));
     table->setItem(8, 0, new QTableWidgetItem(*str,0));
     table->setItem(9, 0, new QTableWidgetItem(*str,0));
-    table->move(200,200);
+    table->move(200,200);*/
     w.show();
 
     return a.exec();

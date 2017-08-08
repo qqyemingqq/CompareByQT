@@ -1,6 +1,13 @@
-#include "comepareoperate.h"
+#include "compareoperate.h"
+//#include <QTableWidget>
+#include "qdebug.h"
 
-comepareoperate::comepareoperate()
+ComepareOperate::ComepareOperate()
 {
 
+}
+
+void ComepareOperate::PlaceTableDate(QTableWidget &tableWidget, QString &fileUrl)
+{
+    qDebug()<<"sssss"<<endl;
 }
