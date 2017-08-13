@@ -4,6 +4,7 @@
 #include <ActiveQt/QAxObject>
 #include <QtSql/QSqlDatabase>
 #include "xlsxdocument.h"
+#include "qdebug.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,9 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ComepareOperate *co = new ComepareOperate();
     co->PlaceTableDate(ui->tableLeft,str);
     co->PlaceTableDate(ui->tableRight,str);
-    QXlsx::Document xlsx;
-    xlsx.write("A1", "Hello Qt!");
-    xlsx.saveAs("Test.xlsx");
+    QXlsx::Document xlsx("C:/Users/Ye/CompareByQT/res/ex.xlsx");
+    qDebug()<<xlsx.read("A1");
 }
 
 MainWindow::~MainWindow()
