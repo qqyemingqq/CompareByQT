@@ -6,9 +6,10 @@
 
 class ComepareOperate
 {
+
 public:
     ComepareOperate();
-    void PlaceTableDate(QTableWidget *&tableWidget, QString *&fileUrl);
+    void PlaceTableDate(QTableWidget *&tableWidget, char *fileUrl);
 };
 
 #endif // COMEPAREOPERATE_H
