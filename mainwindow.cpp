@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "compareoperate.h"
-#include <ActiveQt/QAxObject>
+//#include <ActiveQt/QAxObject>
 #include <QtSql/QSqlDatabase>
 #include "qdebug.h"
 #include <QFileDialog>
@@ -10,18 +10,20 @@
 
 ComepareOperate *co = new ComepareOperate();
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QTableWidget *t = new QTableWidget();
-    QString *str = new QString("Excel.Application");
-//    char *file = "C:/Users/Ye/CompareByQT/res/ex.xlsx";
-    // char *file = "D:/SVN_new/策划/2.数据配置表/测试用表/兵种/soldier.xlsx";
+    setCentralWidget(ui->verticalLayoutWidget);
 
-//    co->PlaceTableDate(ui->tableRight,str);9
+    verticalScrollBarLeft = ui->tableLeft->verticalScrollBar();
+    horizontalScrollBarLeft = ui->tableLeft->horizontalScrollBar();
+    verticalScrollBarRight = ui->tableRight->verticalScrollBar();
+    horizontalScrollBarRight = ui->tableRight->horizontalScrollBar();
+
+    syncTablePosition();
+
 }
 
 MainWindow::~MainWindow()
@@ -76,8 +78,16 @@ void MainWindow::beginCompare()
                 qDebug()<<ui->tableLeft->item(r,c)->text();
                 if(ui->tableLeft->item(r,c)->text()!=ui->tableRight->item(r,c)->text())
                 {
-                    ui->tableLeft->item(r,c)->setBackgroundColor(QColor(255,0,0));
-                    ui->tableRight->item(r,c)->setBackgroundColor(QColor(255,0,0));
+                    ui->tableLeft->item(r,c)->setTextColor(QColor(255,0,0));
+                    ui->tableRight->item(r,c)->setTextColor(QColor(255,0,0));
+                    if(true)
+                    {
+                        for(int c1=0;c1<ui->tableLeft->columnCount();c1++)
+                        {
+                            ui->tableLeft->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                            ui->tableRight->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                        }
+                    }
                 }
             }
         }
@@ -101,4 +111,17 @@ void MainWindow::on_fileUrlLeft_returnPressed()
     co->PlaceTableDate(ui->tableLeft,path);
     loadSuccessLeft = true;
     beginCompare();
+}
+
+void MainWindow::syncTablePosition()
+{
+    QObject::connect((QWidget*)verticalScrollBarLeft,SIGNAL(valueChanged(int)),verticalScrollBarRight,SLOT(setValue(int)));
+    QObject::connect((QWidget*)horizontalScrollBarLeft,SIGNAL(valueChanged(int)),horizontalScrollBarRight,SLOT(setValue(int)));
+    QObject::connect((QWidget*)verticalScrollBarRight,SIGNAL(valueChanged(int)),verticalScrollBarLeft,SLOT(setValue(int)));
+    QObject::connect((QWidget*)horizontalScrollBarRight,SIGNAL(valueChanged(int)),horizontalScrollBarLeft,SLOT(setValue(int)));
+}
+void MainWindow::slotTest(int d)
+{
+    qDebug()<<d;
+    qDebug()<<"runed";
 }

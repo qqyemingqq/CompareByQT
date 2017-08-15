@@ -5,7 +5,7 @@
 //#include <QScopedPointer>
 //#include <QList>
 //#include <QVariant>
-#include <ActiveQt/QAxObject>
+//#include <ActiveQt/QAxObject>
 //#include <QXlsx>QXlsx
 #include "xlsxdocument.h"
 

@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QScrollBar>
 namespace Ui {
 class MainWindow;
 }
@@ -24,11 +24,17 @@ private slots:
 
     void on_fileUrlLeft_returnPressed();
 
+    void slotTest(int d);
 private:
     Ui::MainWindow *ui;
     bool loadSuccessLeft = false;
     bool loadSuccessRight = false;
     void beginCompare();
+    void syncTablePosition();
+    QScrollBar* verticalScrollBarLeft;
+    QScrollBar* horizontalScrollBarLeft;
+    QScrollBar* verticalScrollBarRight;
+    QScrollBar* horizontalScrollBarRight;
 };
 
 #endif // MAINWINDOW_H

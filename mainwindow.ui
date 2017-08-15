@@ -20,12 +20,12 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="verticalWidget" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>901</width>
+      <width>964</width>
       <height>411</height>
      </rect>
     </property>
@@ -161,6 +161,9 @@
        </property>
        <item>
         <widget class="QTableWidget" name="tableLeft">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
          <row>
           <property name="text">
            <string>1</string>
@@ -265,6 +268,18 @@
        </item>
        <item>
         <widget class="QTableWidget" name="tableRight">
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOn</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOn</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustIgnored</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
          <row>
           <property name="text">
            <string>1</string>
@@ -378,7 +393,7 @@
      <x>0</x>
      <y>0</y>
      <width>979</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QTableWidget>
-#include <windows.h>
+//#include <windows.h>
 
 int main(int argc, char *argv[])
 {
