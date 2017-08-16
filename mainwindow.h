@@ -25,12 +25,16 @@ private slots:
     void on_fileUrlLeft_returnPressed();
 
     void slotTest(int d);
+
 private:
     Ui::MainWindow *ui;
     bool loadSuccessLeft = false;
     bool loadSuccessRight = false;
+
     void beginCompare();
     void syncTablePosition();
+    void dragMoveEvent(QDragMoveEvent *event);
+
     QScrollBar* verticalScrollBarLeft;
     QScrollBar* horizontalScrollBarLeft;
     QScrollBar* verticalScrollBarRight;

@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     syncTablePosition();
 
+    ui->tableLeft->setDragEnabled(true);
+
 }
 
 MainWindow::~MainWindow()
@@ -124,4 +126,9 @@ void MainWindow::slotTest(int d)
 {
     qDebug()<<d;
     qDebug()<<"runed";
+}
+
+void MainWindow::dragMoveEvent(QDragMoveEvent *event)
+{
+    qDebug()<<"123";
 }
