@@ -1,12 +1,5 @@
 #include "compareoperate.h"
-//#include <QTableWidget>
 #include "qdebug.h"
-
-//#include <QScopedPointer>
-//#include <QList>
-//#include <QVariant>
-//#include <ActiveQt/QAxObject>
-//#include <QXlsx>QXlsx
 #include "xlsxdocument.h"
 
 ComepareOperate::ComepareOperate()

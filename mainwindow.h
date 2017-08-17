@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QScrollBar>
+#include "dragtablewidget.h"
 namespace Ui {
 class MainWindow;
 }

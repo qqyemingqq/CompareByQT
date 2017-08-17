@@ -27,6 +27,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "dragtablewidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -179,7 +180,7 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setSizeConstraint(QLayout::SetMaximumSize);
-        tableLeft = new QTableWidget(verticalLayoutWidget);
+        tableLeft = new DragTableWidget(verticalLayoutWidget);
         if (tableLeft->columnCount() < 8)
             tableLeft->setColumnCount(8);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
@@ -228,7 +229,7 @@ public:
 
         horizontalLayout->addWidget(tableLeft);
 
-        tableRight = new QTableWidget(verticalLayoutWidget);
+        tableRight = new DragTableWidget(verticalLayoutWidget);
         if (tableRight->columnCount() < 8)
             tableRight->setColumnCount(8);
         QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
