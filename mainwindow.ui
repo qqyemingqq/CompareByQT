@@ -160,7 +160,7 @@
         <enum>QLayout::SetMaximumSize</enum>
        </property>
        <item>
-        <widget class="QTableWidget" name="tableLeft">
+        <widget class="dragableWidget" name="tableLeft">
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
          </property>
@@ -273,7 +273,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableWidget" name="tableRight">
+        <widget class="dragableWidget" name="tableRight">
          <property name="verticalScrollBarPolicy">
           <enum>Qt::ScrollBarAlwaysOn</enum>
          </property>
@@ -420,6 +420,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>dragableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>dragablewidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

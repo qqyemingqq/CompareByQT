@@ -33,7 +33,7 @@ private:
 
     void beginCompare();
     void syncTablePosition();
-    void dragMoveEvent(QDragMoveEvent *event);
+//    void dragMoveEvent(QDragMoveEvent *event);
 
     QScrollBar* verticalScrollBarLeft;
     QScrollBar* horizontalScrollBarLeft;

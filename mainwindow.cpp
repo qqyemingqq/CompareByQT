@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     horizontalScrollBarRight = ui->tableRight->horizontalScrollBar();
 
     syncTablePosition();
-
     ui->tableLeft->setDragEnabled(true);
 
 }
@@ -128,7 +127,7 @@ void MainWindow::slotTest(int d)
     qDebug()<<"runed";
 }
 
-void MainWindow::dragMoveEvent(QDragMoveEvent *event)
-{
-    qDebug()<<"123";
-}
+//void MainWindow::dragMoveEvent(QDragMoveEvent *event)
+//{
+//    qDebug()<<"123";
+//}
