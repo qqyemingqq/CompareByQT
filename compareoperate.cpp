@@ -2,6 +2,7 @@
 #include "qdebug.h"
 #include "xlsxdocument.h"
 
+
 ComepareOperate::ComepareOperate()
 {
 //    auto excel = new QAxObject("Excel.Application");
@@ -9,8 +10,9 @@ ComepareOperate::ComepareOperate()
 
 void ComepareOperate::PlaceTableDate(QTableWidget* &tableWidget, QString fileUrl)
 {
-    QByteArray url_ba = fileUrl.toLatin1();
-    char* url_c = url_ba.data();
+    std::string url_ba = fileUrl.toStdString();
+//    QByteArray url_ba = fileUrl.toLoacl8Bit();
+    const char* url_c = url_ba.c_str();
     QXlsx::Document xlsx(url_c);
     qDebug()<<xlsx.read("A1");
     int cols = tableWidget->columnCount();
