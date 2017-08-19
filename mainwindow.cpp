@@ -8,7 +8,6 @@
 #include <QMessageBox>
 
 
-ComepareOperate *co = new ComepareOperate();
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -34,7 +33,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_selectFileLeft_clicked()
 {
     qDebug()<<"clicked on_selectFileLeft_clicked";
-    QString path = QFileDialog::getOpenFileName(this, tr("Open Xlsx"), ".", tr("Image Files(*.xlsx)"));
+    QString path = QFileDialog::getOpenFileName(this, tr("Open Xlsx"), ".", tr("Excel Files(*.xlsx)"));
     if(path.length() == 0) {
         QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
     } else {
@@ -54,15 +53,15 @@ void MainWindow::on_selectFileRight_clicked()
     } else {
         ui->fileUrlRight->setText(path);
         co->PlaceTableDate(ui->tableRight,path);
-        loadSuccessRight = true;
+//        loadSuccessRight = true;
     }
     beginCompare();
 }
 
 void MainWindow::beginCompare()
 {
-    if(loadSuccessLeft&&loadSuccessRight)
-    {
+//    if(loadSuccessLeft&&loadSuccessRight)
+//    {
         qDebug()<<"successed";
         //TODO
         auto rowsL = ui->tableLeft->rowCount();
@@ -92,7 +91,7 @@ void MainWindow::beginCompare()
             }
         }
 
-    }
+//    }
 }
 
 void MainWindow::on_fileUrlRight_returnPressed()
@@ -100,7 +99,7 @@ void MainWindow::on_fileUrlRight_returnPressed()
     auto path = ui->fileUrlRight->text();
     ui->fileUrlRight->setText(path);
     co->PlaceTableDate(ui->tableRight,path);
-    loadSuccessRight = true;
+//    loadSuccessRight = true;
     beginCompare();
 }
 
@@ -109,7 +108,7 @@ void MainWindow::on_fileUrlLeft_returnPressed()
     auto path = ui->fileUrlRight->text();
     ui->fileUrlLeft->setText(path);
     co->PlaceTableDate(ui->tableLeft,path);
-    loadSuccessLeft = true;
+//    loadSuccessLeft = true;
     beginCompare();
 }
 

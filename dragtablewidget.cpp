@@ -1,8 +1,10 @@
 #include "dragtablewidget.h"
 #include "qdebug.h"
 
+
 #include <QDragMoveEvent>
 #include <QDragEnterEvent>
+#include <QMimeData>
 
 DragTableWidget::DragTableWidget(QWidget* parent)
     :QTableWidget(parent)
@@ -19,9 +21,17 @@ void DragTableWidget::dragEnterEvent(QDragEnterEvent *event)
 void DragTableWidget::dragMoveEvent(QDragMoveEvent *event)
 {
     qDebug()<<"draged"<<this;
-    event->acceptProposedAction();
+//    event->acceptProposedAction();
 }
 void DragTableWidget::dropEvent(QDropEvent *event)
 {
-    qDebug()<<"droped"<<this;
+    const QMimeData* md =event->mimeData();
+    qDebug()<<"droped"<<md->hasUrls();
+    if(md->hasUrls())
+    {
+        foreach (QUrl url,md->urls()) {
+            qDebug()<< url.url(QUrl::PreferLocalFile);
+            co->PlaceTableDate(this,url.url(QUrl::PreferLocalFile));
+        }
+    }
 }

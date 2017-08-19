@@ -26,13 +26,16 @@ private slots:
     void on_fileUrlLeft_returnPressed();
 
     void slotTest(int d);
+    void beginCompare();
+
 
 private:
     Ui::MainWindow *ui;
     bool loadSuccessLeft = false;
     bool loadSuccessRight = false;
+    CompareOperate *co = new CompareOperate();
 
-    void beginCompare();
+//    void beginCompare();
     void syncTablePosition();
 //    void dragMoveEvent(QDragMoveEvent *event);
 

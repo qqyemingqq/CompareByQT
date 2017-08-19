@@ -4,12 +4,13 @@
 #include <QWidget>
 #include <QTableWidget>
 
-class ComepareOperate
+class CompareOperate
 {
 
 public:
-    ComepareOperate();
-    void PlaceTableDate(QTableWidget *&tableWidget, QString fileUrl);
+    CompareOperate();
+    void PlaceTableDate(QTableWidget *tableWidget, QString fileUrl);
+    const char* qStringToCppStr(QString qstr);
 };
 
 #endif // COMEPAREOPERATE_H
