@@ -12,12 +12,16 @@ DragTableWidget::DragTableWidget(QWidget* parent)
 
 void DragTableWidget::dragEnterEvent(QDragEnterEvent *event)
 {
-    qDebug()<<"draged";
+    qDebug()<<"Entered"<<this;
     event->acceptProposedAction();
 }
 
 void DragTableWidget::dragMoveEvent(QDragMoveEvent *event)
 {
-    qDebug()<<"draged";
+    qDebug()<<"draged"<<this;
     event->acceptProposedAction();
+}
+void DragTableWidget::dropEvent(QDropEvent *event)
+{
+    qDebug()<<"droped"<<this;
 }
