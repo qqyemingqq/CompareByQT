@@ -56,8 +56,8 @@ public:
     QLineEdit *fileUrlRight;
     QPushButton *selectFileRight;
     QHBoxLayout *horizontalLayout;
-    QTableWidget *tableLeft;
-    QTableWidget *tableRight;
+    DragTableWidget *tableLeft;
+    DragTableWidget *tableRight;
     QMenuBar *menuBar;
     QMenu *menu;
     QToolBar *mainToolBar;

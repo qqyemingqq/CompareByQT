@@ -28,15 +28,14 @@ private slots:
 
     void slotTest(int d);
 
-
 private:
     Ui::MainWindow *ui;
     CompareTables compareTables;
     bool loadSuccessLeft = false;
     bool loadSuccessRight = false;
-    PlaceTableData *co = new PlaceTableData();
-    void beginCompare(QTableWidget *table,QString path);
+    void beginCompare(DragTableWidget *table,QString path);
     void syncTablePosition();
+    void placeTableDate(QTableWidget* tableWidget, QString fileUrl);
 
     QScrollBar* verticalScrollBarLeft;
     QScrollBar* horizontalScrollBarLeft;

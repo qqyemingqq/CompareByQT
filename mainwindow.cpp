@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "placetabledata.h"
 //#include <ActiveQt/QAxObject>
 #include <QtSql/QSqlDatabase>
 #include "qdebug.h"
@@ -54,9 +53,9 @@ void MainWindow::on_selectFileRight_clicked()
     }
 }
 
-void MainWindow::beginCompare(QTableWidget* table, QString path)
+void MainWindow::beginCompare(DragTableWidget* table, QString path)
 {
-    co->PlaceTableDate(table,path);
+    table->setTableDataFromQString(path);
     compareTables.beginCompareTables(ui->tableLeft,ui->tableRight);
 }
 
@@ -76,13 +75,14 @@ void MainWindow::on_fileUrlLeft_returnPressed()
 
 void MainWindow::syncTablePosition()
 {
-    QObject::connect((QWidget*)verticalScrollBarLeft,SIGNAL(valueChanged(int)),verticalScrollBarRight,SLOT(setValue(int)));
-    QObject::connect((QWidget*)horizontalScrollBarLeft,SIGNAL(valueChanged(int)),horizontalScrollBarRight,SLOT(setValue(int)));
-    QObject::connect((QWidget*)verticalScrollBarRight,SIGNAL(valueChanged(int)),verticalScrollBarLeft,SLOT(setValue(int)));
-    QObject::connect((QWidget*)horizontalScrollBarRight,SIGNAL(valueChanged(int)),horizontalScrollBarLeft,SLOT(setValue(int)));
+    QObject::connect(verticalScrollBarLeft,SIGNAL(valueChanged(int)),verticalScrollBarRight,SLOT(setValue(int)));
+    QObject::connect(horizontalScrollBarLeft,SIGNAL(valueChanged(int)),horizontalScrollBarRight,SLOT(setValue(int)));
+    QObject::connect(verticalScrollBarRight,SIGNAL(valueChanged(int)),verticalScrollBarLeft,SLOT(setValue(int)));
+    QObject::connect(horizontalScrollBarRight,SIGNAL(valueChanged(int)),horizontalScrollBarLeft,SLOT(setValue(int)));
 }
 void MainWindow::slotTest(int d)
 {
     qDebug()<<d;
     qDebug()<<"runed";
 }
+
