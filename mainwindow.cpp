@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "compareoperate.h"
+#include "placetabledata.h"
 //#include <ActiveQt/QAxObject>
 #include <QtSql/QSqlDatabase>
 #include "qdebug.h"
@@ -38,10 +38,8 @@ void MainWindow::on_selectFileLeft_clicked()
         QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
     } else {
         ui->fileUrlLeft->setText(path);
-        co->PlaceTableDate(ui->tableLeft,path);
-        loadSuccessLeft = true;
+        beginCompare(ui->tableLeft,path);
     }
-    beginCompare();
 }
 
 void MainWindow::on_selectFileRight_clicked()
@@ -52,64 +50,28 @@ void MainWindow::on_selectFileRight_clicked()
         QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
     } else {
         ui->fileUrlRight->setText(path);
-        co->PlaceTableDate(ui->tableRight,path);
-//        loadSuccessRight = true;
+        beginCompare(ui->tableRight,path);
     }
-    beginCompare();
 }
 
-void MainWindow::beginCompare()
+void MainWindow::beginCompare(QTableWidget* table, QString path)
 {
-//    if(loadSuccessLeft&&loadSuccessRight)
-//    {
-        qDebug()<<"successed";
-        //TODO
-        auto rowsL = ui->tableLeft->rowCount();
-        auto colsL = ui->tableLeft->columnCount();
-        auto rowsR = ui->tableRight->rowCount();
-        auto colsR = ui->tableRight->columnCount();
-        auto minCol = colsL<=colsR?colsL:colsR;
-        auto minRow = rowsL<=rowsR?rowsL:rowsR;
-        for(int c=0;c<minCol;c++)
-        {
-            for(int r=0;r<minRow;r++)
-            {
-                qDebug()<<ui->tableLeft->item(r,c)->text();
-                if(ui->tableLeft->item(r,c)->text()!=ui->tableRight->item(r,c)->text())
-                {
-                    ui->tableLeft->item(r,c)->setTextColor(QColor(255,0,0));
-                    ui->tableRight->item(r,c)->setTextColor(QColor(255,0,0));
-                    if(true)
-                    {
-                        for(int c1=0;c1<ui->tableLeft->columnCount();c1++)
-                        {
-                            ui->tableLeft->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
-                            ui->tableRight->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
-                        }
-                    }
-                }
-            }
-        }
-
-//    }
+    co->PlaceTableDate(table,path);
+    compareTables.beginCompareTables(ui->tableLeft,ui->tableRight);
 }
 
 void MainWindow::on_fileUrlRight_returnPressed()
 {
     auto path = ui->fileUrlRight->text();
     ui->fileUrlRight->setText(path);
-    co->PlaceTableDate(ui->tableRight,path);
-//    loadSuccessRight = true;
-    beginCompare();
+    beginCompare(ui->tableRight,path);
 }
 
 void MainWindow::on_fileUrlLeft_returnPressed()
 {
     auto path = ui->fileUrlRight->text();
     ui->fileUrlLeft->setText(path);
-    co->PlaceTableDate(ui->tableLeft,path);
-//    loadSuccessLeft = true;
-    beginCompare();
+    beginCompare(ui->tableLeft,path);
 }
 
 void MainWindow::syncTablePosition()
@@ -124,8 +86,3 @@ void MainWindow::slotTest(int d)
     qDebug()<<d;
     qDebug()<<"runed";
 }
-
-//void MainWindow::dragMoveEvent(QDragMoveEvent *event)
-//{
-//    qDebug()<<"123";
-//}

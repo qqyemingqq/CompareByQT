@@ -2,7 +2,8 @@
 #define DRAGTABLEWIDGET_H
 #include <QTableWidget>
 #include <QWidget>
-#include "compareoperate.h"
+#include "placetabledata.h"
+
 class DragTableWidget : public QTableWidget
 {
 public:
@@ -12,7 +13,7 @@ protected:
     void dragMoveEvent(QDragMoveEvent *event);
     void dropEvent(QDropEvent *event);
 private:
-    CompareOperate *co = new CompareOperate();
+    PlaceTableData *co = new PlaceTableData();
 };
 
 #endif // DRAGTABLEWIDGET_H

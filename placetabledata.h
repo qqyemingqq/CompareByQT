@@ -4,11 +4,11 @@
 #include <QWidget>
 #include <QTableWidget>
 
-class CompareOperate
+class PlaceTableData
 {
 
 public:
-    CompareOperate();
+    PlaceTableData();
     void PlaceTableDate(QTableWidget *tableWidget, QString fileUrl);
     const char* qStringToCppStr(QString qstr);
 };

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QScrollBar>
 #include "dragtablewidget.h"
+#include "comparetables.h"
 namespace Ui {
 class MainWindow;
 }
@@ -26,18 +27,16 @@ private slots:
     void on_fileUrlLeft_returnPressed();
 
     void slotTest(int d);
-    void beginCompare();
 
 
 private:
     Ui::MainWindow *ui;
+    CompareTables compareTables;
     bool loadSuccessLeft = false;
     bool loadSuccessRight = false;
-    CompareOperate *co = new CompareOperate();
-
-//    void beginCompare();
+    PlaceTableData *co = new PlaceTableData();
+    void beginCompare(QTableWidget *table,QString path);
     void syncTablePosition();
-//    void dragMoveEvent(QDragMoveEvent *event);
 
     QScrollBar* verticalScrollBarLeft;
     QScrollBar* horizontalScrollBarLeft;
