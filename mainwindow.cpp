@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     verticalScrollBarRight = ui->tableRight->verticalScrollBar();
     horizontalScrollBarRight = ui->tableRight->horizontalScrollBar();
 
-    syncTablePosition();
+    installSignal();
     qDebug()<<ui->tableLeft;
 }
 
@@ -37,6 +37,7 @@ void MainWindow::on_selectFileLeft_clicked()
         QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
     } else {
         ui->fileUrlLeft->setText(path);
+        ui->tableLeft->setTableDataFromQString(path);
         beginCompare(ui->tableLeft,path);
     }
 }
@@ -73,12 +74,14 @@ void MainWindow::on_fileUrlLeft_returnPressed()
     beginCompare(ui->tableLeft,path);
 }
 
-void MainWindow::syncTablePosition()
+void MainWindow::installSignal()
 {
     QObject::connect(verticalScrollBarLeft,SIGNAL(valueChanged(int)),verticalScrollBarRight,SLOT(setValue(int)));
     QObject::connect(horizontalScrollBarLeft,SIGNAL(valueChanged(int)),horizontalScrollBarRight,SLOT(setValue(int)));
     QObject::connect(verticalScrollBarRight,SIGNAL(valueChanged(int)),verticalScrollBarLeft,SLOT(setValue(int)));
     QObject::connect(horizontalScrollBarRight,SIGNAL(valueChanged(int)),horizontalScrollBarLeft,SLOT(setValue(int)));
+
+    QObject::connect(ui->tableLeft,SIGNAL(tableChangeSignal(bool)),this,SLOT(beginCompareTables()));
 }
 void MainWindow::slotTest(int d)
 {
@@ -86,3 +89,33 @@ void MainWindow::slotTest(int d)
     qDebug()<<"runed";
 }
 
+void MainWindow::beginCompareTables()
+{
+    qDebug()<<"successed";
+    auto rowsL = ui->tableLeft->rowCount();
+    auto colsL = ui->tableLeft->columnCount();
+    auto rowsR = ui->tableRight->rowCount();
+    auto colsR = ui->tableRight->columnCount();
+    auto minCol = colsL<=colsR?colsL:colsR;
+    auto minRow = rowsL<=rowsR?rowsL:rowsR;
+    for(int c=0;c<minCol;c++)
+    {
+        for(int r=0;r<minRow;r++)
+        {
+            qDebug()<<ui->tableLeft->item(r,c)->text();
+            if(ui->tableLeft->item(r,c)->text()!=ui->tableRight->item(r,c)->text())
+            {
+                ui->tableLeft->item(r,c)->setTextColor(QColor(255,0,0));
+                ui->tableRight->item(r,c)->setTextColor(QColor(255,0,0));
+                if(true)
+                {
+                    for(int c1=0;c1<ui->tableLeft->columnCount();c1++)
+                    {
+                        ui->tableLeft->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                        ui->tableRight->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                    }
+                }
+            }
+        }
+    }
+}

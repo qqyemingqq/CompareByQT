@@ -24,6 +24,7 @@ void DragTableWidget::setTableDataFromQString(QString url)
             this->setItem(r,c,new QTableWidgetItem(xlsx.read(r+1,c+1).toString()));
         }
     }
+
 }
 
 void DragTableWidget::dragEnterEvent(QDragEnterEvent *event)
@@ -44,6 +45,7 @@ void DragTableWidget::dropEvent(QDropEvent *event)
         foreach (QUrl url,md->urls()) {
             qDebug()<< url.url(QUrl::PreferLocalFile);
             setTableDataFromQString(url.url(QUrl::PreferLocalFile));
+            emit tableChangeSignal(true);
         }
     }
 }

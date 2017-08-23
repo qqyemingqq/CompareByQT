@@ -5,9 +5,12 @@
 
 class DragTableWidget : public QTableWidget
 {
+    Q_OBJECT
 public:
     DragTableWidget(QWidget *parent);
     void setTableDataFromQString(QString url);
+signals:
+    void tableChangeSignal(bool b);
 protected:
     void dragEnterEvent(QDragEnterEvent *event);
     void dragMoveEvent(QDragMoveEvent *event);
