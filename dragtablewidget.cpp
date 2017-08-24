@@ -14,17 +14,27 @@ DragTableWidget::DragTableWidget(QWidget* parent)
 
 void DragTableWidget::setTableDataFromQString(QString url)
 {
-    QXlsx::Document xlsx(Tool::getInstance()->qStringToCppStr(url));
+    QXlsx::Document xlsx(Tool::getInstance()->qStringToStdStr(url));
     qDebug()<<xlsx.read("A1");
     int cols = this->columnCount();
     int rows = this->rowCount();
-    qDebug()<<Tool::getInstance()->qStringToCppStr(url)<<rows<<cols<<endl;
+    qDebug()<<Tool::getInstance()->qStringToStdStr(url)<<rows<<cols<<endl;
     for(int r=0;r<rows;r++){
         for(int c=0;c<cols;c++){
             this->setItem(r,c,new QTableWidgetItem(xlsx.read(r+1,c+1).toString()));
         }
     }
 
+}
+
+QString DragTableWidget::getTableFileUrl()
+{
+    return tableFileUrl;
+}
+
+void DragTableWidget::setTableFileUrl(const QString &value)
+{
+    tableFileUrl = value;
 }
 
 void DragTableWidget::dragEnterEvent(QDragEnterEvent *event)
@@ -45,8 +55,8 @@ void DragTableWidget::dropEvent(QDropEvent *event)
         foreach (QUrl url,md->urls()) {
             qDebug()<< url.url(QUrl::PreferLocalFile);
             setTableDataFromQString(url.url(QUrl::PreferLocalFile));
+            tableFileUrl = url.url(QUrl::PreferLocalFile);
             emit tableChangeSignal(true);
         }
     }
 }
-

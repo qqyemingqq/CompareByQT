@@ -9,6 +9,10 @@ class DragTableWidget : public QTableWidget
 public:
     DragTableWidget(QWidget *parent);
     void setTableDataFromQString(QString url);
+    QString tableFileUrl;
+    QString getTableFileUrl();
+    void setTableFileUrl(const QString &value);
+
 signals:
     void tableChangeSignal(bool b);
 protected:

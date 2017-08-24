@@ -5,7 +5,7 @@
 class Tool
 {
 public:
-    const char* qStringToCppStr(QString qstr);
+    const char* qStringToStdStr(QString qstr);
     static Tool* getInstance();
 private:
     Tool();

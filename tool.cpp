@@ -19,7 +19,8 @@ Tool &Tool::operator=(const Tool &)
 {
 
 }
-const char* Tool::qStringToCppStr(QString qstr)
+
+const char* Tool::qStringToStdStr(QString qstr)
 {
     std::string str = qstr.toStdString();
     const char* url = str.c_str();
