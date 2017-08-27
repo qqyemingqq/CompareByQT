@@ -27,14 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     dragtablewidget.cpp \
-    tool.cpp \
-    comparetables.cpp
+    tool.cpp
 
 HEADERS += \
         mainwindow.h \
     dragtablewidget.h \
-    tool.h \
-    comparetables.h
+    tool.h
 
 FORMS += \
         mainwindow.ui
+
+UI_DIR += ..\

@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setCentralWidget(ui->verticalLayoutWidget);
+    setCentralWidget(ui->verticalWidget);
 
     verticalScrollBarLeft = ui->tableLeft->verticalScrollBar();
     horizontalScrollBarLeft = ui->tableLeft->horizontalScrollBar();
@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     horizontalScrollBarRight = ui->tableRight->horizontalScrollBar();
 
     installSignal();
-    qDebug()<<ui->tableLeft;
+    qDebug()<<ui->tableLeft->verticalHeaderItem(10)->text();
 }
 
 MainWindow::~MainWindow()
@@ -57,7 +57,7 @@ void MainWindow::on_selectFileRight_clicked()
 void MainWindow::beginCompare(DragTableWidget* table, QString path)
 {
     table->setTableDataFromQString(path);
-    compareTables.beginCompareTables(ui->tableLeft,ui->tableRight);
+    beginCompareTables();
 }
 
 void MainWindow::on_fileUrlRight_returnPressed()
