@@ -26,11 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    compareoperate.cpp
+    dragtablewidget.cpp \
+    tool.cpp \
+    comparetables.cpp
 
 HEADERS += \
         mainwindow.h \
-    compareoperate.h
+    dragtablewidget.h \
+    tool.h \
+    comparetables.h
 
 FORMS += \
         mainwindow.ui
