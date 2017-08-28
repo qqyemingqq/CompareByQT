@@ -160,7 +160,7 @@
         <enum>QLayout::SetMaximumSize</enum>
        </property>
        <item>
-        <widget class="dragTableWidget" name="tableLeft">
+        <widget class="DragTableWidget" name="tableLeft">
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
          </property>
@@ -222,7 +222,7 @@
          </row>
          <row>
           <property name="text">
-           <string>新建行</string>
+           <string>11</string>
           </property>
          </row>
          <row>
@@ -273,7 +273,7 @@
         </widget>
        </item>
        <item>
-        <widget class="dragTableWidget" name="tableRight">
+        <widget class="DragTableWidget" name="tableRight">
          <property name="verticalScrollBarPolicy">
           <enum>Qt::ScrollBarAlwaysOn</enum>
          </property>
@@ -406,6 +406,7 @@
     <property name="title">
      <string>文件</string>
     </property>
+    <addaction name="actionOpen"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -418,11 +419,16 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>dragTableWidget</class>
+   <class>DragTableWidget</class>
    <extends>QTableWidget</extends>
    <header>dragTablewidget.h</header>
   </customwidget>
