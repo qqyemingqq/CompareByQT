@@ -6,12 +6,15 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-
+bool MainWindow::diff = false;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
+    tableLeft = ui->tableLeft;
+    tableRight = ui->tableRight;
     ui->setupUi(this);
     setCentralWidget(ui->verticalWidget);
 
@@ -21,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     horizontalScrollBarRight = ui->tableRight->horizontalScrollBar();
 
     installSignal();
-    qDebug()<<ui->tableLeft->verticalHeaderItem(10)->text();
 }
 
 MainWindow::~MainWindow()
@@ -37,8 +39,8 @@ void MainWindow::on_selectFileLeft_clicked()
         QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
     } else {
         ui->fileUrlLeft->setText(path);
-        ui->tableLeft->setTableDataFromQString(path);
-        beginCompare(ui->tableLeft,path);
+        tableLeft->setTableDataFromQString(path);
+        beginCompare(tableLeft,path);
     }
 }
 
@@ -50,7 +52,7 @@ void MainWindow::on_selectFileRight_clicked()
         QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
     } else {
         ui->fileUrlRight->setText(path);
-        beginCompare(ui->tableRight,path);
+        beginCompare(tableRight,path);
     }
 }
 
@@ -82,13 +84,39 @@ void MainWindow::installSignal()
     QObject::connect(horizontalScrollBarRight,SIGNAL(valueChanged(int)),horizontalScrollBarLeft,SLOT(setValue(int)));
 
     QObject::connect(ui->tableLeft,SIGNAL(tableChangeSignal(bool)),this,SLOT(beginCompareTables()));
+    QObject::connect(ui->tableRight,SIGNAL(tableChangeSignal(bool)),this,SLOT(beginCompareTables()));
+}
+
+void MainWindow::resetItems()
+{
+    int bgLen = tempItemBg.size();
+    int fontColorLen = tempItemFontcolor.size();
+    for(int i=0;i<bgLen;i++)
+    {
+        tempItemBg[i]->setBackgroundColor(QColor(255,255,255,0));
+        qDebug()<<"resetbg";
+    }
+    for(int i=0;i<fontColorLen;i++)
+    {
+        tempItemFontcolor[i]->setTextColor(QColor(0,0,0));
+        qDebug()<<"resetFontColor";
+    }
+//    vector<QTableWidgetItem*>::const_iterator bgIterator = tempItemBg.begin();
+//    auto fontColorIterator = tempItemFontcolor.begin();
+//    for(;bgIterator != tempItemBg.end();bgIterator++)
+//    {
+//       *bgIterator.setTextColor(QColor(0,0,0));
+//    }
+//    for(;fontColorIterator != tempItemBg.end();fontColorIterator++)
+//    {
+//       *fontColorIterator->setBackgroundColor(QColor(255,255,255,0));
+//    }
 }
 void MainWindow::slotTest(int d)
 {
     qDebug()<<d;
     qDebug()<<"runed";
 }
-
 void MainWindow::beginCompareTables()
 {
     qDebug()<<"successed";
@@ -102,20 +130,30 @@ void MainWindow::beginCompareTables()
     {
         for(int r=0;r<minRow;r++)
         {
-            qDebug()<<ui->tableLeft->item(r,c)->text();
-            if(ui->tableLeft->item(r,c)->text()!=ui->tableRight->item(r,c)->text())
+//            qDebug()<<ui->tableLeft->item(r,c)->text();
+            if(tableRight->item(r,c)&&tableLeft->item(r,c)&&
+                    tableLeft->item(r,c)->text()
+                    !=
+               tableRight->item(r,c)->text())
             {
-                ui->tableLeft->item(r,c)->setTextColor(QColor(255,0,0));
-                ui->tableRight->item(r,c)->setTextColor(QColor(255,0,0));
-                if(true)
+                diff=true;
+                tableLeft->item(r,c)->setTextColor(QColor(255,0,0));
+                tempItemFontcolor.push_back(tableLeft->item(r,c));
+                tableRight->item(r,c)->setTextColor(QColor(255,0,0));
+                tempItemFontcolor.push_back(tableRight->item(r,c));
+                for(int c1=0;c1<tableLeft->columnCount();c1++)
                 {
-                    for(int c1=0;c1<ui->tableLeft->columnCount();c1++)
-                    {
-                        ui->tableLeft->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
-                        ui->tableRight->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
-                    }
+                    tableLeft->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                    tempItemBg.push_back(tableLeft->item(r,c1));
+                    tableRight->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                    tempItemBg.push_back(tableRight->item(r,c1));
                 }
             }
         }
+    }
+    if(diff)
+    {
+        resetItems();
+        diff=false;
     }
 }
