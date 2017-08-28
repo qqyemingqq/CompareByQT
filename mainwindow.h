@@ -4,10 +4,6 @@
 #include <QMainWindow>
 #include <QScrollBar>
 #include "dragtablewidget.h"
-<<<<<<< HEAD
-#include "comparetables.h"
-=======
->>>>>>> parent of e99d077... unresolved SIGSEGV problem
 namespace Ui {
 class MainWindow;
 }
@@ -35,7 +31,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    CompareTables compareTables;
     bool loadSuccessLeft = false;
     bool loadSuccessRight = false;
     void beginCompare(DragTableWidget *table,QString path);

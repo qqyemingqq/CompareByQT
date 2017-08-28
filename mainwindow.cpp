@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setCentralWidget(ui->verticalLayoutWidget);
+    setCentralWidget(ui->verticalWidget);
 
     verticalScrollBarLeft = ui->tableLeft->verticalScrollBar();
     horizontalScrollBarLeft = ui->tableLeft->horizontalScrollBar();
@@ -21,11 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     horizontalScrollBarRight = ui->tableRight->horizontalScrollBar();
 
     installSignal();
-<<<<<<< HEAD
-    qDebug()<<ui->tableLeft;
-=======
     qDebug()<<ui->tableLeft->verticalHeaderItem(10)->text();
->>>>>>> parent of e99d077... unresolved SIGSEGV problem
 }
 
 MainWindow::~MainWindow()
@@ -42,7 +38,7 @@ void MainWindow::on_selectFileLeft_clicked()
     } else {
         ui->fileUrlLeft->setText(path);
         ui->tableLeft->setTableDataFromQString(path);
-        beginCompare(ui->tableLeft,path);
+        beginCompareTables();
     }
 }
 
@@ -54,28 +50,28 @@ void MainWindow::on_selectFileRight_clicked()
         QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
     } else {
         ui->fileUrlRight->setText(path);
-        beginCompare(ui->tableRight,path);
+        beginCompareTables();
     }
 }
 
 void MainWindow::beginCompare(DragTableWidget* table, QString path)
 {
     table->setTableDataFromQString(path);
-    compareTables.beginCompareTables(ui->tableLeft,ui->tableRight);
+    beginCompareTables();
 }
 
 void MainWindow::on_fileUrlRight_returnPressed()
 {
     auto path = ui->fileUrlRight->text();
     ui->fileUrlRight->setText(path);
-    beginCompare(ui->tableRight,path);
+    beginCompareTables();
 }
 
 void MainWindow::on_fileUrlLeft_returnPressed()
 {
     auto path = ui->fileUrlRight->text();
     ui->fileUrlLeft->setText(path);
-    beginCompare(ui->tableLeft,path);
+    beginCompareTables();
 }
 
 void MainWindow::installSignal()
