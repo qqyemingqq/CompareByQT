@@ -4,7 +4,10 @@
 #include <QMainWindow>
 #include <QScrollBar>
 #include "dragtablewidget.h"
+<<<<<<< HEAD
 #include "comparetables.h"
+=======
+>>>>>>> parent of e99d077... unresolved SIGSEGV problem
 namespace Ui {
 class MainWindow;
 }

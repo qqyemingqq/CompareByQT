@@ -21,7 +21,11 @@ MainWindow::MainWindow(QWidget *parent) :
     horizontalScrollBarRight = ui->tableRight->horizontalScrollBar();
 
     installSignal();
+<<<<<<< HEAD
     qDebug()<<ui->tableLeft;
+=======
+    qDebug()<<ui->tableLeft->verticalHeaderItem(10)->text();
+>>>>>>> parent of e99d077... unresolved SIGSEGV problem
 }
 
 MainWindow::~MainWindow()
