@@ -24,7 +24,7 @@ void DragTableWidget::setTableDataFromQString(QString url)
             this->setItem(r,c,new QTableWidgetItem(xlsx.read(r+1,c+1).toString()));
         }
     }
-
+    hasData = true;
 }
 
 QString DragTableWidget::getTableFileUrl()

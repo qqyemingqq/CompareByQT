@@ -12,6 +12,7 @@ public:
     QString tableFileUrl;
     QString getTableFileUrl();
     void setTableFileUrl(const QString &value);
+    bool hasData = false;
 
 signals:
     void tableChangeSignal(bool b);

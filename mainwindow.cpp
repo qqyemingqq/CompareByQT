@@ -21,7 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
     horizontalScrollBarRight = ui->tableRight->horizontalScrollBar();
 
     installSignal();
-    qDebug()<<ui->tableLeft->verticalHeaderItem(10)->text();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -102,17 +103,20 @@ void MainWindow::beginCompareTables()
     {
         for(int r=0;r<minRow;r++)
         {
-            qDebug()<<ui->tableLeft->item(r,c)->text();
-            if(ui->tableLeft->item(r,c)->text()!=ui->tableRight->item(r,c)->text())
+            qDebug()<<ui->tableRight->hasData<<ui->tableLeft->hasData;
+            if(ui->tableRight->hasData&&ui->tableLeft->hasData)
             {
-                ui->tableLeft->item(r,c)->setTextColor(QColor(255,0,0));
-                ui->tableRight->item(r,c)->setTextColor(QColor(255,0,0));
-                if(true)
+                if(ui->tableLeft->item(r,c)->text()!=ui->tableRight->item(r,c)->text())
                 {
-                    for(int c1=0;c1<ui->tableLeft->columnCount();c1++)
+                    ui->tableLeft->item(r,c)->setTextColor(QColor(255,0,0));
+                    ui->tableRight->item(r,c)->setTextColor(QColor(255,0,0));
+                    if(true)
                     {
-                        ui->tableLeft->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
-                        ui->tableRight->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                        for(int c1=0;c1<ui->tableLeft->columnCount();c1++)
+                        {
+                            ui->tableLeft->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                            ui->tableRight->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                        }
                     }
                 }
             }
