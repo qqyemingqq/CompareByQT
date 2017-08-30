@@ -41,6 +41,7 @@ private:
     QScrollBar* horizontalScrollBarLeft;
     QScrollBar* verticalScrollBarRight;
     QScrollBar* horizontalScrollBarRight;
+    bool hasDifferent;
 };
 
 #endif // MAINWINDOW_H

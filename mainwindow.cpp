@@ -5,7 +5,9 @@
 #include "qdebug.h"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <vector>
 
+using namespace std;
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -22,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     installSignal();
 
+    hasDifferent = false;
 
 }
 
@@ -83,6 +86,7 @@ void MainWindow::installSignal()
     QObject::connect(horizontalScrollBarRight,SIGNAL(valueChanged(int)),horizontalScrollBarLeft,SLOT(setValue(int)));
 
     QObject::connect(ui->tableLeft,SIGNAL(tableChangeSignal(bool)),this,SLOT(beginCompareTables()));
+    QObject::connect(ui->tableRight,SIGNAL(tableChangeSignal(bool)),this,SLOT(beginCompareTables()));
 }
 void MainWindow::slotTest(int d)
 {
@@ -99,27 +103,49 @@ void MainWindow::beginCompareTables()
     auto colsR = ui->tableRight->columnCount();
     auto minCol = colsL<=colsR?colsL:colsR;
     auto minRow = rowsL<=rowsR?rowsL:rowsR;
+
+    vector<QTableWidgetItem*> tempBgList;
+    vector<QTableWidgetItem*> tempFontList;
+
+
+
     for(int c=0;c<minCol;c++)
     {
         for(int r=0;r<minRow;r++)
         {
-            qDebug()<<ui->tableRight->hasData<<ui->tableLeft->hasData;
             if(ui->tableRight->hasData&&ui->tableLeft->hasData)
             {
                 if(ui->tableLeft->item(r,c)->text()!=ui->tableRight->item(r,c)->text())
                 {
+                    hasDifferent = true;
                     ui->tableLeft->item(r,c)->setTextColor(QColor(255,0,0));
+                    tempFontList.push_back(ui->tableLeft->item(r,c));
                     ui->tableRight->item(r,c)->setTextColor(QColor(255,0,0));
+                    tempFontList.push_back(ui->tableRight->item(r,c));
                     if(true)
                     {
                         for(int c1=0;c1<ui->tableLeft->columnCount();c1++)
                         {
                             ui->tableLeft->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                            tempBgList.push_back(ui->tableLeft->item(r,c1));
                             ui->tableRight->item(r,c1)->setBackgroundColor(QColor(33,33,33,100));
+                            tempBgList.push_back(ui->tableRight->item(r,c1));
                         }
                     }
                 }
             }
         }
+    }
+    qDebug()<<"reset:"<<(!hasDifferent && ui->tableLeft->hasData && ui->tableRight->hasData);
+    if(hasDifferent && ui->tableLeft->hasData && ui->tableRight->hasData)
+    {
+        for(int i=0;i<tempBgList.size();i++)
+        {
+            tempBgList[i]->setBackgroundColor(QColor(0,0,0,0));
+        }
+//        for(int i=0;tempFontList.size();i++)
+//        {
+//            tempFontList[i]->setTextColor(QColor(0,0,0));
+//        }
     }
 }
