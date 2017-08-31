@@ -5,9 +5,6 @@
 #include "qdebug.h"
 #include <QFileDialog>
 #include <QMessageBox>
-#include <vector>
-
-using namespace std;
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -108,7 +105,6 @@ void MainWindow::beginCompareTables()
     vector<QTableWidgetItem*> tempFontList;
 
 
-
     for(int c=0;c<minCol;c++)
     {
         for(int r=0;r<minRow;r++)
@@ -122,7 +118,8 @@ void MainWindow::beginCompareTables()
                     tempFontList.push_back(ui->tableLeft->item(r,c));
                     ui->tableRight->item(r,c)->setTextColor(QColor(255,0,0));
                     tempFontList.push_back(ui->tableRight->item(r,c));
-                    if(true)
+                    sameRows.push_back(r);
+                    if(r == minRow)
                     {
                         for(int c1=0;c1<ui->tableLeft->columnCount();c1++)
                         {
@@ -139,7 +136,7 @@ void MainWindow::beginCompareTables()
     qDebug()<<"reset:"<<(!hasDifferent && ui->tableLeft->hasData && ui->tableRight->hasData);
     if(hasDifferent && ui->tableLeft->hasData && ui->tableRight->hasData)
     {
-        for(int i=0;i<tempBgList.size();i++)
+        for(size_t i=0;i<tempBgList.size();i++)
         {
             tempBgList[i]->setBackgroundColor(QColor(0,0,0,0));
         }
@@ -148,4 +145,14 @@ void MainWindow::beginCompareTables()
 //            tempFontList[i]->setTextColor(QColor(0,0,0));
 //        }
     }
+}
+
+vector<int> MainWindow::uniqueValueInVector(vector<int> v){
+    vector<int>::iterator vector_iterator;
+    sort(v.begin(),v.end());
+    vector_iterator = unique(v.begin(),v.end());
+    if(vector_iterator != v.end()){
+        v.erase(vector_iterator,v.end());
+    }
+    return v;
 }

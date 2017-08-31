@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QScrollBar>
 #include "dragtablewidget.h"
+#include <vector>
+
+using namespace std;
+
 namespace Ui {
 class MainWindow;
 }
@@ -31,11 +35,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    bool loadSuccessLeft = false;
-    bool loadSuccessRight = false;
     void beginCompare(DragTableWidget *table,QString path);
     void installSignal();
     void placeTableDate(QTableWidget* tableWidget, QString fileUrl);
+
+    vector<int> sameRows;
+    vector<int> uniqueValueInVector(vector<int> v);
 
     QScrollBar* verticalScrollBarLeft;
     QScrollBar* horizontalScrollBarLeft;
